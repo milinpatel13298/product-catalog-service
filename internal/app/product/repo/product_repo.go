@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"cloud.google.com/go/spanner"
-	"product-catalog-service/internal/app/product/contracts"
 	"product-catalog-service/internal/app/product/domain"
 	"product-catalog-service/internal/models/mproduct"
 )
@@ -44,11 +43,10 @@ func (r *ProductRepo) InsertMut(p *domain.Product) *spanner.Mutation {
 	}
 
 	if discount := p.Discount(); discount != nil {
-		// Convert discount percentage to NUMERIC
-		percent := discount.Percentage()
-		// NUMERIC in Spanner is stored as string representation
+		percent := discount.Percentage() // big.Rat
+	
 		model.DiscountPercent = &spanner.NullNumeric{
-			Numeric: spanner.Numeric(percent.String()),
+			Numeric: percent.FloatString(2), // convert big.Rat → string
 			Valid:   true,
 		}
 		model.DiscountStartDate = spanner.NullTime{
@@ -60,6 +58,7 @@ func (r *ProductRepo) InsertMut(p *domain.Product) *spanner.Mutation {
 			Valid: true,
 		}
 	}
+	
 
 	if archivedAt := p.ArchivedAt(); archivedAt != nil {
 		model.ArchivedAt = spanner.NullTime{

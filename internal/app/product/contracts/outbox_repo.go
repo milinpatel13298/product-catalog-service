@@ -1,8 +1,6 @@
 package contracts
 
 import (
-	"context"
-
 	"cloud.google.com/go/spanner"
 )
 

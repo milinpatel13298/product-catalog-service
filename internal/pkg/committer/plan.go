@@ -2,9 +2,10 @@ package committer
 
 import (
 	"context"
+	"cloud.google.com/go/spanner"
 
 	"github.com/MediStatTech/commitplan"
-	"github.com/MediStatTech/commitplan/drivers/spanner"
+	//"github.com/MediStatTech/commitplan/drivers/spanner"
 )
 
 // PlanCommitter wraps commitplan.Plan and provides a typed Apply method.
@@ -17,11 +18,12 @@ func New(client *spanner.Client) *PlanCommitter {
 	return &PlanCommitter{client: client}
 }
 
-// Apply executes the commit plan atomically.
+
 func (c *PlanCommitter) Apply(ctx context.Context, plan *commitplan.Plan) error {
 	if plan == nil {
 		return nil
 	}
-	return plan.Apply(ctx, c.client)
+	_, err := c.client.Apply(ctx, plan.Mutations()) // assuming you have Mutations() getter
+	return err
 }
 

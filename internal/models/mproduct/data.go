@@ -64,6 +64,19 @@ func UpdateMut(productID string, updates map[string]interface{}) *spanner.Mutati
 	if len(updates) == 0 {
 		return nil
 	}
-	return spanner.Update(TableName, updates)
+
+	columns := make([]string, 0, len(updates)+1)
+	values := make([]interface{}, 0, len(updates)+1)
+
+	// Ensure primary key is included
+	columns = append(columns, "product_id")
+	values = append(values, productID)
+
+	for col, val := range updates {
+		columns = append(columns, col)
+		values = append(values, val)
+	}
+
+	return spanner.Update(TableName, columns, values)
 }
 
