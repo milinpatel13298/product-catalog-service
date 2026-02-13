@@ -3,8 +3,8 @@ package committer
 import (
 	"context"
 
-	"github.com/Vektor-AI/commitplan"
-	"github.com/Vektor-AI/commitplan/drivers/spanner"
+	"github.com/MediStatTech/commitplan"
+	"github.com/MediStatTech/commitplan/drivers/spanner"
 )
 
 // PlanCommitter wraps commitplan.Plan and provides a typed Apply method.

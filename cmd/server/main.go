@@ -1,10 +1,5 @@
 package main
 
-import "log"
-
-func main() {
-	log.Println("Product Catapackage main
-
 import (
     "context"
     "log"
@@ -85,7 +80,5 @@ func main() {
         log.Fatalf("failed to serve gRPC server: %v", err)
     }
 }
-log Service starting (stub)...")
-	// TODO: initialize Spanner, DI container, and gRPC server
-}
+
 

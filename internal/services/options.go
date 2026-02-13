@@ -19,8 +19,8 @@ import (
     "product-catalog-service/internal/app/product/usecases/remove_discount"
 
     // Queries
-    "product-catalog-service/internal/app/product/queries/get_product"
-    "product-catalog-service/internal/app/product/queries/list_products"
+    "product-catalog-service/internal/app/product/queries/getproduct"
+    "product-catalog-service/internal/app/product/queries/listproducts"
 
     // Infrastructure
     "product-catalog-service/internal/pkg/committer"

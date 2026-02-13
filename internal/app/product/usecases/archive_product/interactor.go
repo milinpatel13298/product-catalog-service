@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Vektor-AI/commitplan"
+	"github.com/MediStatTech/commitplan"
 	"product-catalog-service/internal/app/product/contracts"
 	"product-catalog-service/internal/app/product/domain"
 	"product-catalog-service/internal/pkg/clock"
